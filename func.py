@@ -6,7 +6,7 @@ import pycurl
 file1 = open('MatList.txt', 'r')
 MatList = helpclass.help.loadListFromFile(file1)
 def SendToServer(sock, msg):
-  sock.send('{}\n'.format(msg))
+  sock.send('{}\n'.format(msg).encode('ascii'))
 def ReceiveMail(sock, msg, ChatWidget):
   msg = msg.split('\n')
   for i in msg:
@@ -27,7 +27,7 @@ def getURL():
 	except ImportError:
 		from io import StringIO
 	c = pycurl.Curl()
-	buf = StringIO.StringIO()
+	buf = StringIO()
 	c.setopt(c.URL, 'https://api.twitch.tv/kraken/streams/{}/'.format(settings.channel.split('#')[1]))
 	c.setopt(c.WRITEFUNCTION, buf.write)
 	c.perform()
