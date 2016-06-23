@@ -3,7 +3,7 @@ import socket
 import settings
 from func import *
 import time
-from PyQt4 import uic, QtCore, QtGui
+from PyQt4 import uic, QtGui
 import sys
 
 def main():
