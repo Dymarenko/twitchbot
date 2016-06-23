@@ -7,7 +7,7 @@ file1 = open('MatList.txt', 'r')
 MatList = helpclass.help.loadListFromFile(file1)
 def SendToServer(sock, msg):
   sock.send('{}\n'.format(msg))
-def ReceiveMail(sock, msg):
+def ReceiveMail(sock, msg, ChatWidget):
   msg = msg.split('\n')
   for i in msg:
     i = i.split(' ', 3)
@@ -17,7 +17,7 @@ def ReceiveMail(sock, msg):
       SendToServer(sock, 'PONG {}'.format(i[1]))
     elif i[1] == 'PRIVMSG':
       aut = i[0].split('!')[0]
-      print('>{}: {}'.format(aut[1:], i[3][1:]))
+      ChatWidget.addItem('>{}: {}'.format(aut[1:], i[3][1:]))
       CatchMat(i[3][1:])
     else:
       print(' '.join(i))
